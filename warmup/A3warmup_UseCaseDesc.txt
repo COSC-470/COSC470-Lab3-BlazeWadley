@@ -1,0 +1,123 @@
+General structure of a use case description:
+
+Use Case <id>. <use case name>
+Primary actor: 
+Description: 
+Pre-condition: 
+Post-condition: 
+
+Main scenario:
+- List of 3-9 steps describing common interaction scenario
+
+Extensions:
+- Flow of control or error handling different from main scenario
+
+
+
+Use Case 1. Deposit Funds
+Primary actor: Customer
+Description: Allows a customer to deposit funds into an account.
+Pre-condition: User must be logged in.
+Post-condition: Account balance is updated with deposit amount.
+
+Main scenario:
+1. User selects a checking or savings account (Use Case #6).
+2. User enters deposit amount.
+3. System requests envelope with deposit.
+4. Once envelope is received, deposit is made.  Account balance is updated.  Receipt is printed.
+
+Extensions:
+1.1 Invalid account selected
+  1.1.1 If user selects a checking or savings account and they do not have one, an error is shown.
+4.1 No envelope
+  3.1.1 If a customer does not provide envelope after 30 seconds, then error is reported and transaction is aborted.
+
+
+
+Use Case 2. Withdraw Funds
+Primary actor: Customer
+Description: Allows customer to withdraw funds from an account.
+Pre-condition: User must be logged in.
+Post-condition: Withdraw is recorded and money is given to customer.
+
+Main scenario:
+1. User selects a checking or savings account (Use Case #6).
+2. User enters withdraw amount.
+3. Withdraw is performed, database is updated, and funds given to the customer.
+
+Extensions:
+1.1 Invalid account selected
+  1.1.1 If user selects a checking or savings account and they do not have one, an error is shown.
+3.1 Insufficient funds
+  3.1.1 If withdraw amount is greater than account balance, then error is reported and transaction is aborted.
+3.2 Insufficient funds in ATM
+  3.2.1 Indicate the ATM is currently unavailable.  Cancel transaction.
+  
+
+Use Case 3. Transfer Funds
+Primary actor: Customer
+Description:  Allows a user to transfer funds between a checking and savings account and vice versa.
+Pre-condition: User must be logged in.
+Post-condition: Transfer is performed between accounts.
+
+Main scenario:
+1) User must select destination account (checking or savings) (Use Case #6).
+2) User must select target account (checking or savings) (Use Case #6).
+3) User enters amount to transfer.
+4) Transfer is performed and recorded.  Receipt is printed if requested.
+
+Extensions:
+2.1 Select same account
+  2.1.1 If user selects same account for source and destination, then error is reported and transaction is aborted.
+4.1 Insufficient funds
+  4.1.1 If transfer amount is greater than source account balance, then error is reported and transaction is aborted.
+
+
+Use Case 4. Check Balance
+Primary actor: Customer
+Description: User can check the balance of an existing account.
+Pre-condition: User must be logged in.
+Post-condition: If a valid account is chosen, the balance is displayed on the screen.
+
+Main scenario:
+1. User selects a checking or savings account (Use Case #6).
+2. The balance of the account selected is shown.
+
+Extensions:
+2.1 Invalid account selected
+  2.1.1 If user selects a checking or savings account and they do not have one, an error is shown.
+
+
+
+Use Case 5. Validate PIN
+Primary actor: Customer
+Description: A customer must swipe their card and enter a correct PIN# to gain functionality of the system.
+Pre-condition: Customer must have swiped card in reader.
+Post-condition: Customer is either granted access to menu (PIN validated) or rejected from using system (PIN denied).
+
+Main scenario:
+1. User enters PIN#.
+2. PIN# is validated with internal database.  If matches, user is presented a menu.  Otherwise, user can re-enter PIN# up to 3 times.
+
+Extensions:
+2.1 PIN# Denied
+  2.1.1 If PIN# denied 3 times, then the system takes the card from the user and locks the account.
+
+
+Use Case 6. Select Account
+Primary actor: Customer
+Description: Allows the user to pick either a savings or checking account.
+Pre-condition: User must be logged in.
+Post-condition: Either a savings account or checking account is selected.
+
+Main scenario:
+1) User is presented with option of selecting a checking or savings account for a transaction.
+
+
+
+Other general issues that may be captured in extensions:
+
+1) Bank system is unavailable.
+2) User cancels transaction before completion.
+3) User has no valid accounts for a transaction.
+4) During login, the system is unable to read the bank card.
